@@ -14,6 +14,7 @@ class ReposVC: UIViewController {
     
     var search = UISearchController(searchResultsController: nil)
     let reposViewModel = RepoViewModel()
+    var refreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class ReposVC: UIViewController {
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
         getRepos()
+        addRefreshControllerToTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,6 +30,14 @@ class ReposVC: UIViewController {
         setupNavigationSearch()
     }
     
+    fileprivate func addRefreshControllerToTable() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.darkGray])
+        refreshControl.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    // Navigation Bar UI customization
     fileprivate func setupNavigationSearch() {
         search.searchBar.delegate = self
         search.searchBar.placeholder = "Search Repo"
@@ -36,6 +46,35 @@ class ReposVC: UIViewController {
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         search.obscuresBackgroundDuringPresentation = true
         self.navigationItem.searchController = search
+    }
+    
+}
+
+
+// MARK: VIEW MODEL ACTIONS
+extension ReposVC {
+    @objc func refresh(_ sender: AnyObject) {
+        reposViewModel.getAllRepos { (done, errorMsg) in
+            DispatchQueue.main.async {
+                self.refreshControl.endRefreshing()
+                if done {
+                    self.tableView.reloadData()
+                }else {
+                    self.shouldPresentAlertViewWithAction(withTitle: "ERROR",
+                                                          message: errorMsg,
+                                                          yesActionTitle: "Try Again!",
+                                                          noActionTitle: "Cancel",
+                                                          yesActionColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
+                                                          noActionColor: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1),
+                                                          delegate: nil,
+                                                          parentViewController: self) { [weak self] (done) in
+                        if done {
+                            self?.getRepos()
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func getRepos() {
@@ -87,10 +126,6 @@ class ReposVC: UIViewController {
             }
         }
     }
-    
-    
-
-
 }
 
 
