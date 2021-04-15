@@ -11,23 +11,31 @@ import SafariServices
 class ReposVC: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBtn: UIBarButtonItem!
     
     var search = UISearchController(searchResultsController: nil)
     let reposViewModel = RepoViewModel()
     var refreshControl = UIRefreshControl()
+    var observer: NSKeyValueObservation?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView()
+        setupDelegates()
         getRepos()
         addRefreshControllerToTable()
+        changeNavigationBarTitleView(KVO: &observer, largeTitle: "GitHub-Repos", smallImageName: "github")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigationSearch()
+    }
+    
+    func setupDelegates() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.tableFooterView = UIView()
+        reposViewModel.delegate = self
     }
     
     fileprivate func addRefreshControllerToTable() {
@@ -48,84 +56,45 @@ class ReposVC: UIViewController {
         self.navigationItem.searchController = search
     }
     
+    @IBAction func searchBtnTapped(_ sender: UIBarButtonItem) {
+        search.isActive = true
+        search.searchBar.becomeFirstResponder()
+        search.searchBar.setShowsCancelButton(true, animated: true)
+    }
+    
 }
 
 
-// MARK: VIEW MODEL ACTIONS
-extension ReposVC {
-    @objc func refresh(_ sender: AnyObject) {
-        reposViewModel.getAllRepos { (done, errorMsg) in
-            DispatchQueue.main.async {
-                self.refreshControl.endRefreshing()
-                if done {
-                    self.tableView.reloadData()
-                }else {
-                    self.shouldPresentAlertViewWithAction(withTitle: "ERROR",
-                                                          message: errorMsg,
-                                                          yesActionTitle: "Try Again!",
-                                                          noActionTitle: "Cancel",
-                                                          yesActionColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                                          noActionColor: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1),
-                                                          delegate: nil,
-                                                          parentViewController: self) { [weak self] (done) in
-                        if done {
-                            self?.getRepos()
-                        }
-                    }
-                }
-            }
+// MARK: VIEW MODEL DELEGATE & ACTIONS
+extension ReposVC: NetworkHandler {
+    func successNetworkRequest() {
+        DispatchQueue.main.async {
+            self.shouldPresentLoadingView(false)
+            self.tableView.reloadData()
         }
+    }
+    
+    func failedNetworkRequest(withError error: String) {
+        self.shouldPresentLoadingView(false)
+        DispatchQueue.main.async {
+            self.shouldPresentAlertView(true, title: "GitHub-Repos", alertText: error, actionTitle: "Ok", errorView: nil)
+        }
+    }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        reposViewModel.getAllRepos()
     }
     
     func getRepos() {
-        shouldPresentLoadingView(true)
-        reposViewModel.getAllRepos { (done, errorMsg) in
-            DispatchQueue.main.async {
-                self.shouldPresentLoadingView(false)
-                if done {
-                    self.tableView.reloadData()
-                }else {
-                    self.shouldPresentAlertViewWithAction(withTitle: "ERROR",
-                                                          message: errorMsg,
-                                                          yesActionTitle: "Try Again!",
-                                                          noActionTitle: "Cancel",
-                                                          yesActionColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                                          noActionColor: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1),
-                                                          delegate: nil,
-                                                          parentViewController: self) { [weak self] (done) in
-                        if done {
-                            self?.getRepos()
-                        }
-                    }
-                }
-            }
-        }
+        self.shouldPresentLoadingView(true)
+        reposViewModel.getAllRepos()
     }
     
     func searchFor(repo q: String) {
-        shouldPresentLoadingView(true)
-        reposViewModel.searchForRepos(query: q) { (done, errorMsg) in
-            DispatchQueue.main.async {
-                self.shouldPresentLoadingView(false)
-                if done {
-                    self.tableView.reloadData()
-                }else {
-                    self.shouldPresentAlertViewWithAction(withTitle: "ERROR",
-                                                          message: errorMsg,
-                                                          yesActionTitle: "Try Again!",
-                                                          noActionTitle: "Cancel",
-                                                          yesActionColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1),
-                                                          noActionColor: #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1),
-                                                          delegate: nil,
-                                                          parentViewController: self) { [weak self] (done) in
-                        if done {
-                            self?.getRepos()
-                        }
-                    }
-                }
-            }
-        }
+        self.shouldPresentLoadingView(true)
+        reposViewModel.searchForRepos(query: q)
     }
+    
 }
 
 
@@ -186,5 +155,15 @@ extension ReposVC: UISearchBarDelegate {
         getRepos()
     }
     
-    
+}
+
+
+// MARK: - SCROLL
+extension ReposVC: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        search.isActive = false
+        search.searchBar.resignFirstResponder()
+        search.searchBar.setShowsCancelButton(false, animated: true)
+    }
+
 }

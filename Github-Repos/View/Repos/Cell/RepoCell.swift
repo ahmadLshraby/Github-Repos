@@ -12,6 +12,7 @@ class RepoCell: UITableViewCell {
     @IBOutlet weak var repoImageView: UIImageView!
     @IBOutlet weak var repoNameLbl: UILabel!
     @IBOutlet weak var repoOwnerNameLbl: UILabel!
+    @IBOutlet weak var repoDateLbl: UILabel!
     @IBOutlet weak var reedMeBtn: UIButton!
     
     
@@ -21,8 +22,9 @@ class RepoCell: UITableViewCell {
         didSet {
             repoNameLbl.text = repo?.name
             repoOwnerNameLbl.text = repo?.OwnerName
+            repoDateLbl.getRepoDateFrom(repoUrl: repo?.repoDate ?? "")
             if let imgUrl = repo?.imageUrl {
-//                repoImageView.downsampleImageForURL(imageLink: imgUrl)
+                repoImageView.downloadFrom(fromLink: imgUrl, contentMode: .scaleAspectFill)
             }
             if let url = repo?.repoUrl {
                 repoUrl = url

@@ -11,6 +11,7 @@ import Foundation
 class RepoViewModel {
     
     public private (set) var reposData: [ReposData]?
+    var delegate: NetworkHandler?
     
 }
 
@@ -18,42 +19,42 @@ class RepoViewModel {
 // MARK: NETWORKING
 extension RepoViewModel {
     // Get all repos data
-    func getAllRepos(handler: @escaping(Bool, String) -> Void) {
+    func getAllRepos() {
         NetworkServices.request(endPoint: Repos_EndPoints.listGithubRepos, responseClass: [ReposData].self) { (reData, error) in
             if let repos = reData {
                 self.reposData = repos
-                handler(true, "")
+                self.delegate?.successNetworkRequest()
             }else {
                 switch error {
                 case .connectionError(let msg):
-                    handler(false, msg)
+                    self.delegate?.failedNetworkRequest(withError: msg)
                 case .serverError(let msg):
-                    handler(false, msg)
+                    self.delegate?.failedNetworkRequest(withError: msg)
                 case .responseError(let msg):
-                    handler(false, msg)
+                    self.delegate?.failedNetworkRequest(withError: msg)
                 default:
-                    handler(false, "UNKOWN")
+                    self.delegate?.failedNetworkRequest(withError: "UNKNOWN")
                 }
             }
         }
     }
     
     // Search repos for the query entered
-    func searchForRepos(query: String, handler: @escaping(Bool, String) -> Void) {
+    func searchForRepos(query: String) {
         NetworkServices.request(endPoint: Repos_EndPoints.searchGithubRepos(q: query), responseClass: SearchModelData.self) { (reData, error) in
             if let repos = reData {
                 self.reposData = repos.items
-                handler(true, "")
+                self.delegate?.successNetworkRequest()
             }else {
                 switch error {
                 case .connectionError(let msg):
-                    handler(false, msg)
+                    self.delegate?.failedNetworkRequest(withError: msg)
                 case .serverError(let msg):
-                    handler(false, msg)
+                    self.delegate?.failedNetworkRequest(withError: msg)
                 case .responseError(let msg):
-                    handler(false, msg)
+                    self.delegate?.failedNetworkRequest(withError: msg)
                 default:
-                    handler(false, "UNKOWN")
+                    self.delegate?.failedNetworkRequest(withError: "UNKNOWN")
                 }
             }
         }

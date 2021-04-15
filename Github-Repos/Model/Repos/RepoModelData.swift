@@ -12,12 +12,14 @@ struct ReposData: Codable {
     let name, fullName: String?
     let owner: Owner?
     let htmlURL: String?
+    let repoURL: String?
 
     enum CodingKeys: String, CodingKey {
         case name
         case fullName = "full_name"
         case owner
         case htmlURL = "html_url"
+        case repoURL = "url"
     }
 }
 
@@ -42,6 +44,15 @@ struct SearchModelData: Codable {
         case totalCount = "total_count"
         case incompleteResults = "incomplete_results"
         case items
+    }
+}
+
+// MARK: - ReposDetailsData
+struct ReposDetailsData: Codable {
+    let createdAt: String?
+
+    enum CodingKeys: String, CodingKey {
+        case createdAt = "created_at"
     }
 }
 
