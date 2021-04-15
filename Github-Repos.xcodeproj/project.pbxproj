@@ -15,6 +15,8 @@
 		041F329E262868960099A87D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041F329C262868960099A87D /* LaunchScreen.storyboard */; };
 		041F32A9262868970099A87D /* Github_ReposTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F32A8262868970099A87D /* Github_ReposTests.swift */; };
 		041F32B4262868970099A87D /* Github_ReposUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F32B3262868970099A87D /* Github_ReposUITests.swift */; };
+		041F32D5262869660099A87D /* ErrorModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F32D4262869660099A87D /* ErrorModelData.swift */; };
+		041F32DA262869720099A87D /* RepoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F32D9262869710099A87D /* RepoModelData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		041F32AF262868970099A87D /* Github-ReposUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Github-ReposUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		041F32B3262868970099A87D /* Github_ReposUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Github_ReposUITests.swift; sourceTree = "<group>"; };
 		041F32B5262868970099A87D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		041F32D4262869660099A87D /* ErrorModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModelData.swift; sourceTree = "<group>"; };
+		041F32D9262869710099A87D /* RepoModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoModelData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +103,13 @@
 		041F3290262868930099A87D /* Github-Repos */ = {
 			isa = PBXGroup;
 			children = (
-				041F3291262868930099A87D /* AppDelegate.swift */,
-				041F3293262868930099A87D /* SceneDelegate.swift */,
-				041F3295262868930099A87D /* ViewController.swift */,
-				041F3297262868930099A87D /* Main.storyboard */,
-				041F329A262868960099A87D /* Assets.xcassets */,
-				041F329C262868960099A87D /* LaunchScreen.storyboard */,
 				041F329F262868960099A87D /* Info.plist */,
+				041F32CC262868F40099A87D /* Helpers */,
+				041F32CB262868EC0099A87D /* Extensions */,
+				041F32CA262868E40099A87D /* Network */,
+				041F32C7262868CD0099A87D /* Model */,
+				041F32C8262868D40099A87D /* View */,
+				041F32C9262868DA0099A87D /* Controller */,
 			);
 			path = "Github-Repos";
 			sourceTree = "<group>";
@@ -126,6 +130,56 @@
 				041F32B5262868970099A87D /* Info.plist */,
 			);
 			path = "Github-ReposUITests";
+			sourceTree = "<group>";
+		};
+		041F32C7262868CD0099A87D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				041F32D4262869660099A87D /* ErrorModelData.swift */,
+				041F32D9262869710099A87D /* RepoModelData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		041F32C8262868D40099A87D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				041F3297262868930099A87D /* Main.storyboard */,
+				041F329A262868960099A87D /* Assets.xcassets */,
+				041F329C262868960099A87D /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		041F32C9262868DA0099A87D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				041F3295262868930099A87D /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		041F32CA262868E40099A87D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		041F32CB262868EC0099A87D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		041F32CC262868F40099A87D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				041F3291262868930099A87D /* AppDelegate.swift */,
+				041F3293262868930099A87D /* SceneDelegate.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,6 +312,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				041F32D5262869660099A87D /* ErrorModelData.swift in Sources */,
+				041F32DA262869720099A87D /* RepoModelData.swift in Sources */,
 				041F3296262868930099A87D /* ViewController.swift in Sources */,
 				041F3292262868930099A87D /* AppDelegate.swift in Sources */,
 				041F3294262868930099A87D /* SceneDelegate.swift in Sources */,
@@ -439,6 +495,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F7S769X964;
 				INFOPLIST_FILE = "Github-Repos/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -458,6 +515,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = F7S769X964;
 				INFOPLIST_FILE = "Github-Repos/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
