@@ -15,7 +15,9 @@ class RepoViewModel {
 }
 
 
+// MARK: NETWORKING
 extension RepoViewModel {
+    // Get all repos data
     func getAllRepos(handler: @escaping(Bool, String) -> Void) {
         NetworkServices.request(endPoint: Repos_EndPoints.listGithubRepos, responseClass: [ReposData].self) { (reData, error) in
             if let repos = reData {
@@ -36,6 +38,7 @@ extension RepoViewModel {
         }
     }
     
+    // Search repos for the query entered
     func searchForRepos(query: String, handler: @escaping(Bool, String) -> Void) {
         NetworkServices.request(endPoint: Repos_EndPoints.searchGithubRepos(q: query), responseClass: SearchModelData.self) { (reData, error) in
             if let repos = reData {
