@@ -134,7 +134,6 @@
 				041F329F262868960099A87D /* Info.plist */,
 				041F3291262868930099A87D /* AppDelegate.swift */,
 				041F3293262868930099A87D /* SceneDelegate.swift */,
-				041F32CC262868F40099A87D /* Helpers */,
 				041F3319262872540099A87D /* EnumsAndProtocols */,
 				041F32CB262868EC0099A87D /* Extensions */,
 				041F32CA262868E40099A87D /* Network */,
@@ -209,13 +208,6 @@
 				0470D4832628EE73007C0E2D /* UILabelExt.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		041F32CC262868F40099A87D /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		041F3319262872540099A87D /* EnumsAndProtocols */ = {
