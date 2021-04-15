@@ -32,7 +32,6 @@ class NetworkServices {
                     completion(nil, .responseError(response: error.localizedDescription))
                 }
             }
-            
         }
         task.resume()
     }
