@@ -11,7 +11,7 @@ import Foundation
 class RepoViewModel {
     
     public private (set) var reposData: [ReposData]?
-    var delegate: NetworkHandler?
+    var delegate: NetworkHandler? // delegate to pass actions
     
 }
 

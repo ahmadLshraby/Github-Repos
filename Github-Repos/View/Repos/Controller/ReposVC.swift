@@ -40,7 +40,7 @@ class ReposVC: UIViewController {
     
     fileprivate func addRefreshControllerToTable() {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh", attributes: [.font: UIFont.systemFont(ofSize: 16), .foregroundColor: UIColor.darkGray])
-        refreshControl.tintColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        refreshControl.tintColor = .label
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
@@ -49,10 +49,10 @@ class ReposVC: UIViewController {
     fileprivate func setupNavigationSearch() {
         search.searchBar.delegate = self
         search.searchBar.placeholder = "Search Repo"
-        search.searchBar.barTintColor = .black
-        search.searchBar.tintColor = .black
+        search.searchBar.barTintColor = .label
+        search.searchBar.tintColor = .label
         UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        search.obscuresBackgroundDuringPresentation = true
+        search.obscuresBackgroundDuringPresentation = false
         self.navigationItem.searchController = search
     }
     
@@ -67,13 +67,16 @@ class ReposVC: UIViewController {
 
 // MARK: VIEW MODEL DELEGATE & ACTIONS
 extension ReposVC: NetworkHandler {
+    // when success network request and return valid data to reload table
     func successNetworkRequest() {
         DispatchQueue.main.async {
             self.shouldPresentLoadingView(false)
+            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
         }
     }
     
+    // when failure occures in network request and return error
     func failedNetworkRequest(withError error: String) {
         DispatchQueue.main.async {
             self.shouldPresentLoadingView(false)
@@ -81,6 +84,7 @@ extension ReposVC: NetworkHandler {
         }
     }
     
+    // pull to refresh data
     @objc func refresh(_ sender: AnyObject) {
         reposViewModel.getAllRepos()
     }
@@ -128,7 +132,7 @@ extension ReposVC: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - SEARCH BAR
 extension ReposVC: UISearchBarDelegate {
-    
+    // auto searchafter2 characters
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             getRepos()
@@ -136,19 +140,17 @@ extension ReposVC: UISearchBarDelegate {
             searchBarSearchButtonClicked(searchBar)
         }
     }
-    
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let query = searchBar.text ?? ""
         searchFor(repo: query)
     }
     
-    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
-    
+    // reload all repos when cancel search
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
         searchBar.setShowsCancelButton(false, animated: true)

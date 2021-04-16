@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIImageView {
+    // download image from a given avatarUrl from owner objectfrom the repo model
     func downloadFrom(fromLink link:String?, contentMode mode: UIView.ContentMode) {
         contentMode = mode
         if link == nil {
