@@ -21,9 +21,9 @@ class ReposVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupDelegates()
-        getRepos()
         addRefreshControllerToTable()
         changeNavigationBarTitleView(KVO: &observer, largeTitle: "GitHub-Repos", smallImageName: "github")
+        getRepos()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,8 +75,8 @@ extension ReposVC: NetworkHandler {
     }
     
     func failedNetworkRequest(withError error: String) {
-        self.shouldPresentLoadingView(false)
         DispatchQueue.main.async {
+            self.shouldPresentLoadingView(false)
             self.shouldPresentAlertView(true, title: "GitHub-Repos", alertText: error, actionTitle: "Ok", errorView: nil)
         }
     }

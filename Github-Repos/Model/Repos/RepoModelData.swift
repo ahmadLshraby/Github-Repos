@@ -13,9 +13,10 @@ struct ReposData: Codable {
     let owner: Owner?
     let htmlURL: String?
     let repoURL: String?
+    let id: Int?
 
     enum CodingKeys: String, CodingKey {
-        case name
+        case name, id
         case fullName = "full_name"
         case owner
         case htmlURL = "html_url"

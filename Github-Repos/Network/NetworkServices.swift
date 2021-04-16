@@ -29,6 +29,7 @@ class NetworkServices {
                     let responseObj = try JSONDecoder().decode(T.self, from: data)
                     completion(responseObj, nil)
                 }catch {
+                    print("ERROR: \(error)")
                     completion(nil, .responseError(response: error.localizedDescription))
                 }
             }
