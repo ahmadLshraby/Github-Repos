@@ -20,6 +20,7 @@
 ## Table of Contents
 + [About](#about)
 + [Details](#details)
++ [Endpoints](#endpoints)
 
 ## About <a name = "about"></a>
 - Fetching public GitHub repositories, with search feature
@@ -30,4 +31,9 @@
 - MVVM with protocol and delegate
 - Native URLSession for networking and fetching images
 - Codable for parsing JSON
+
+## Endpoints <a name = "endpoints"></a>
+# Public GitHub endpoints
+- Fetch repositories, GET request, https://api.github.com/repositories
+- Search repositories, GET request, https://api.github.com/search/repositories?q=\(query)&sort=stars&order=desc
 
