@@ -8,6 +8,7 @@
 import UIKit
 
 extension UILabel {
+    // get the date from the given url with key createdAt
     func getRepoDateFrom(repoUrl: String) {
         NetworkServices.request(endPoint: Repos_EndPoints.getDate(dateURL: repoUrl), responseClass: ReposDetailsData.self) { (dateResponse, error) in
             DispatchQueue.main.async {
@@ -21,6 +22,7 @@ extension UILabel {
         
     }
     
+    //convert date from given string format to full date style
     func convertDateFrom(date: String) {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"

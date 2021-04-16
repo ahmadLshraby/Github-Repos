@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Enum For all the used endpoints that conform to EndPoint protocol and will implement its required properties
+
 enum Repos_EndPoints: EndPoint {
     // Repo
     case listGithubRepos

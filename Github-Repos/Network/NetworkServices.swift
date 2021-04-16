@@ -8,7 +8,7 @@
 import Foundation
 
 class NetworkServices {
-    
+    /// General networkrequest function with URLSession request and Codable for parsing JSON response
     class func request<T: Codable> (endPoint: EndPoint, responseClass: T.Type, completion: @escaping (T?, NetworkServicesError?) -> Void) {
         let endPointURL = endPoint.path
         guard let url = URL(string: endPointURL) else {

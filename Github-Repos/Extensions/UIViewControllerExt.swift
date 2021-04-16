@@ -9,6 +9,7 @@ import UIKit
 
 extension UIViewController {
     
+    // show loading spinner when start a request and hide it when get the response
     func shouldPresentLoadingView(_ status: Bool) {
         var fadeView: UIView?
         
@@ -46,6 +47,7 @@ extension UIViewController {
         }
     }
     
+    // present alert view to show an error message with no action needed from the user
     func shouldPresentAlertView(_ status: Bool, title: String?, alertText: String?, actionTitle: String?, errorView: UIView?) {
         var fadeView: UIView?
         
@@ -79,6 +81,11 @@ extension UIViewController {
         }
     }
     
+    /*
+     change the navigation bar title
+     Large navigation >>> text title
+     Small navigation >>> image title view
+     */
     func changeNavigationBarTitleView(KVO observer: inout NSKeyValueObservation?, largeTitle title: String, smallImageName image: String) {
         observer = self.navigationController?.navigationBar.observe(\.bounds, options: [.new], changeHandler: { (navigationBar, changes) in
             if let height = changes.newValue?.height {
