@@ -4,8 +4,6 @@ GitHub-Repos Demo
 ## Table of Contents
 + [About](#about)
 + [Details](#details)
-+ [Usage](#usage)
-+ [Contributing](../CONTRIBUTING.md)
 
 ## About <a name = "about"></a>
 1- Fetching public GitHub repositories, with search feature
