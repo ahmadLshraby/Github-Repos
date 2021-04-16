@@ -6,12 +6,12 @@ GitHub-Repos Demo
 + [Details](#details)
 
 ## About <a name = "about"></a>
-1- Fetching public GitHub repositories, with search feature
-2- Simple details about the repository
-3- Select a repository to open it with safari services
+- Fetching public GitHub repositories, with search feature
+- Simple details about the repository
+- Select a repository to open it with safari services
 
 ## Details <a name = "details"></a>
-1- MVVM with protocol and delegate
-2- Native URLSession for networking and fetching images
-3- Codable for parsing JSON
+- MVVM with protocol and delegate
+- Native URLSession for networking and fetching images
+- Codable for parsing JSON
 
