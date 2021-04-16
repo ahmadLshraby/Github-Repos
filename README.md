@@ -20,20 +20,25 @@
 ## Table of Contents
 + [About](#about)
 + [Details](#details)
-+ [Endpoints](#endpoints)
++ [Public GitHub endpoints](#endpoints)
+
+---
 
 ## About <a name = "about"></a>
 - Fetching public GitHub repositories, with search feature
 - Simple details about the repository
 - Select a repository to open it with safari services
 
+---
+
 ## Details <a name = "details"></a>
 - MVVM with protocol and delegate
 - Native URLSession for networking and fetching images
 - Codable for parsing JSON
 
-## Endpoints <a name = "endpoints"></a>
-# Public GitHub endpoints
+---
+
+## Public GitHub endpoints <a name = "endpoints"></a>
 - Fetch repositories, GET request, https://api.github.com/repositories
 - Search repositories, GET request, https://api.github.com/search/repositories?q=\(query)&sort=stars&order=desc
 
