@@ -42,3 +42,5 @@
 - Fetch repositories, GET request, https://api.github.com/repositories
 - Search repositories, GET request, https://api.github.com/search/repositories?q=\(query)&sort=stars&order=desc
 
+# X-RateLimit-Limit = 60 for network IP
+
