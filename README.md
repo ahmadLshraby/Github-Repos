@@ -21,6 +21,7 @@
 + [About](#about)
 + [Details](#details)
 + [Public GitHub endpoints](#endpoints)
++ [Limitations](#limitations)
 
 ---
 
@@ -42,5 +43,7 @@
 - Fetch repositories, GET request, https://api.github.com/repositories
 - Search repositories, GET request, https://api.github.com/search/repositories?q=\(query)&sort=stars&order=desc
 
-# X-RateLimit-Limit = 60 for network IP
+---
+## Limitations <a name = "limitations"></a>
+- X-RateLimit-Limit = 60 for network IP
 
