@@ -111,7 +111,7 @@ extension ReposVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell",for: indexPath) as? RepoCell {
             if let repo = reposViewModel.reposData?[indexPath.row] {
-                cell.repo = RepoCellViewMode(repo: repo)
+                cell.repo = RepoCellViewModel(repo: repo)
                 return cell
             }
         }
@@ -132,7 +132,7 @@ extension ReposVC: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: - SEARCH BAR
 extension ReposVC: UISearchBarDelegate {
-    // auto searchafter2 characters
+    // auto search after 2 characters
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             getRepos()

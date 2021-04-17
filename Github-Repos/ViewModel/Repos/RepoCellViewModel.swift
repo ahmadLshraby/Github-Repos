@@ -7,7 +7,7 @@
 
 import Foundation
 
-class RepoCellViewMode {
+class RepoCellViewModel {
     var name: String?
     var OwnerName: String?
     var imageUrl: String?

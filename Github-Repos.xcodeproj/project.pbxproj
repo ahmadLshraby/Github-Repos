@@ -13,7 +13,6 @@
 		041F3299262868930099A87D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041F3297262868930099A87D /* Main.storyboard */; };
 		041F329B262868960099A87D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 041F329A262868960099A87D /* Assets.xcassets */; };
 		041F329E262868960099A87D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041F329C262868960099A87D /* LaunchScreen.storyboard */; };
-		041F32A9262868970099A87D /* Github_ReposTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F32A8262868970099A87D /* Github_ReposTests.swift */; };
 		041F32B4262868970099A87D /* Github_ReposUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F32B3262868970099A87D /* Github_ReposUITests.swift */; };
 		041F32D5262869660099A87D /* ErrorModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F32D4262869660099A87D /* ErrorModelData.swift */; };
 		041F32DA262869720099A87D /* RepoModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F32D9262869710099A87D /* RepoModelData.swift */; };
@@ -31,6 +30,10 @@
 		0470D4612628C72A007C0E2D /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470D4602628C72A007C0E2D /* NetworkHandler.swift */; };
 		0470D46F2628D202007C0E2D /* UIImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470D46E2628D202007C0E2D /* UIImageViewExt.swift */; };
 		0470D4842628EE73007C0E2D /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470D4832628EE73007C0E2D /* UILabelExt.swift */; };
+		04839FF2262AF55A00E62071 /* RepoViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04839FF1262AF55A00E62071 /* RepoViewModelTests.swift */; };
+		04839FFA262AF73E00E62071 /* ReposVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04839FF9262AF73E00E62071 /* ReposVCTests.swift */; };
+		0483A012262B263B00E62071 /* UILabelExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483A011262B263B00E62071 /* UILabelExtTests.swift */; };
+		0483A017262B2A5000E62071 /* UIImageViewExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483A016262B2A5000E62071 /* UIImageViewExtTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,7 +63,6 @@
 		041F329D262868960099A87D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		041F329F262868960099A87D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		041F32A4262868970099A87D /* Github-ReposTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Github-ReposTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		041F32A8262868970099A87D /* Github_ReposTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Github_ReposTests.swift; sourceTree = "<group>"; };
 		041F32AA262868970099A87D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		041F32AF262868970099A87D /* Github-ReposUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Github-ReposUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		041F32B3262868970099A87D /* Github_ReposUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Github_ReposUITests.swift; sourceTree = "<group>"; };
@@ -81,6 +83,10 @@
 		0470D4602628C72A007C0E2D /* NetworkHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHandler.swift; sourceTree = "<group>"; };
 		0470D46E2628D202007C0E2D /* UIImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExt.swift; sourceTree = "<group>"; };
 		0470D4832628EE73007C0E2D /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
+		04839FF1262AF55A00E62071 /* RepoViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewModelTests.swift; sourceTree = "<group>"; };
+		04839FF9262AF73E00E62071 /* ReposVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposVCTests.swift; sourceTree = "<group>"; };
+		0483A011262B263B00E62071 /* UILabelExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtTests.swift; sourceTree = "<group>"; };
+		0483A016262B2A5000E62071 /* UIImageViewExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +153,11 @@
 		041F32A7262868970099A87D /* Github-ReposTests */ = {
 			isa = PBXGroup;
 			children = (
-				041F32A8262868970099A87D /* Github_ReposTests.swift */,
 				041F32AA262868970099A87D /* Info.plist */,
+				04839FF1262AF55A00E62071 /* RepoViewModelTests.swift */,
+				04839FF9262AF73E00E62071 /* ReposVCTests.swift */,
+				0483A011262B263B00E62071 /* UILabelExtTests.swift */,
+				0483A016262B2A5000E62071 /* UIImageViewExtTests.swift */,
 			);
 			path = "Github-ReposTests";
 			sourceTree = "<group>";
@@ -156,8 +165,8 @@
 		041F32B2262868970099A87D /* Github-ReposUITests */ = {
 			isa = PBXGroup;
 			children = (
-				041F32B3262868970099A87D /* Github_ReposUITests.swift */,
 				041F32B5262868970099A87D /* Info.plist */,
+				041F32B3262868970099A87D /* Github_ReposUITests.swift */,
 			);
 			path = "Github-ReposUITests";
 			sourceTree = "<group>";
@@ -420,7 +429,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				041F32A9262868970099A87D /* Github_ReposTests.swift in Sources */,
+				0483A017262B2A5000E62071 /* UIImageViewExtTests.swift in Sources */,
+				04839FF2262AF55A00E62071 /* RepoViewModelTests.swift in Sources */,
+				0483A012262B263B00E62071 /* UILabelExtTests.swift in Sources */,
+				04839FFA262AF73E00E62071 /* ReposVCTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
