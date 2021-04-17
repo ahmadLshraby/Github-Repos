@@ -18,7 +18,7 @@ class RepoCell: UITableViewCell {
     
     public private (set) var repoUrl: URL?
     
-    var repo: RepoCellViewMode? {
+    var repo: RepoCellViewModel? {
         didSet {
             repoNameLbl.text = repo?.name
             repoOwnerNameLbl.text = repo?.OwnerName

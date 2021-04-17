@@ -15,7 +15,7 @@ class NetworkServices {
             completion(nil, .connectionError(connection: "End-Point URL not valid"))
             return
         }
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             if error != nil {
                 print("DataTask error", error!)
@@ -33,8 +33,7 @@ class NetworkServices {
                     completion(nil, .responseError(response: error.localizedDescription))
                 }
             }
-        }
-        task.resume()
+        }.resume()
     }
     
 }
