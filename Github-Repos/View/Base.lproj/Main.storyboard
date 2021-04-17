@@ -172,11 +172,10 @@
             </objects>
             <point key="canvasLocation" x="2834.7826086956525" y="-578.57142857142856"/>
         </scene>
-        <!--TRENDING-->
+        <!--Navigation Controller-->
         <scene sceneID="yrG-US-AfY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3D7-xR-QMR" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="TRENDING" image="trendingIcon" selectedImage="trendingIcon" id="8jX-E5-nrR"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="AFb-Ta-DzU">
                         <rect key="frame" x="0.0" y="44" width="414" height="100"/>
@@ -201,7 +200,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="trendingIcon" width="38" height="35"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
