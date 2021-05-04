@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum NetworkServicesError {
+enum NetworkServicesError: Error {
     case serverError(serverError: String)
     case connectionError(connection: String)
     case responseError(response: String)

@@ -6,12 +6,11 @@
 //
 
 import Foundation
-
+import Combine
 
 class RepoViewModel {
     
-    var repos: Observable<[ReposData]> = Observable([])
-    var errorMsg: Observable<String>?
+    var passSubject = PassthroughSubject<[ReposData], NetworkServicesError>()
     
 }
 
@@ -22,18 +21,9 @@ extension RepoViewModel {
     func getAllRepos() {
         NetworkServices.request(endPoint: Repos_EndPoints.listGithubRepos, responseClass: [ReposData].self) { (reData, error) in
             if let repos = reData {
-                self.repos.value = repos
+                self.passSubject.send(repos)
             }else {
-                switch error {
-                case .connectionError(let msg):
-                    self.errorMsg?.value = msg
-                case .serverError(let msg):
-                    self.errorMsg?.value = msg
-                case .responseError(let msg):
-                    self.errorMsg?.value = msg
-                default:
-                    self.errorMsg?.value = "UNKNOWN"
-                }
+                self.passSubject.send(completion: Subscribers.Completion<NetworkServicesError>.failure(error!))
             }
         }
     }
@@ -41,19 +31,10 @@ extension RepoViewModel {
     // Search repos for the query entered
     func searchForRepos(query: String) {
         NetworkServices.request(endPoint: Repos_EndPoints.searchGithubRepos(q: query), responseClass: SearchModelData.self) { (reData, error) in
-            if let repos = reData {
-                self.repos.value = repos.items
+            if let repos = reData?.items {
+                self.passSubject.send(repos)
             }else {
-                switch error {
-                case .connectionError(let msg):
-                    self.errorMsg?.value = msg
-                case .serverError(let msg):
-                    self.errorMsg?.value = msg
-                case .responseError(let msg):
-                    self.errorMsg?.value = msg
-                default:
-                    self.errorMsg?.value = "UNKNOWN"
-                }
+                self.passSubject.send(completion: Subscribers.Completion<NetworkServicesError>.failure(error!))
             }
         }
     }

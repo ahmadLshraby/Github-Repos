@@ -29,7 +29,6 @@
 		041F3366262885E10099A87D /* Inspectables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041F3365262885E10099A87D /* Inspectables.swift */; };
 		0470D46F2628D202007C0E2D /* UIImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470D46E2628D202007C0E2D /* UIImageViewExt.swift */; };
 		0470D4842628EE73007C0E2D /* UILabelExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0470D4832628EE73007C0E2D /* UILabelExt.swift */; };
-		047AA8582640BE3900F3950B /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047AA8572640BE3900F3950B /* Observable.swift */; };
 		04839FF2262AF55A00E62071 /* RepoViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04839FF1262AF55A00E62071 /* RepoViewModelTests.swift */; };
 		04839FFA262AF73E00E62071 /* ReposVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04839FF9262AF73E00E62071 /* ReposVCTests.swift */; };
 		0483A012262B263B00E62071 /* UILabelExtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0483A011262B263B00E62071 /* UILabelExtTests.swift */; };
@@ -82,7 +81,6 @@
 		041F3365262885E10099A87D /* Inspectables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inspectables.swift; sourceTree = "<group>"; };
 		0470D46E2628D202007C0E2D /* UIImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExt.swift; sourceTree = "<group>"; };
 		0470D4832628EE73007C0E2D /* UILabelExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExt.swift; sourceTree = "<group>"; };
-		047AA8572640BE3900F3950B /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		04839FF1262AF55A00E62071 /* RepoViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewModelTests.swift; sourceTree = "<group>"; };
 		04839FF9262AF73E00E62071 /* ReposVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReposVCTests.swift; sourceTree = "<group>"; };
 		0483A011262B263B00E62071 /* UILabelExtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelExtTests.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 				041F3293262868930099A87D /* SceneDelegate.swift */,
 				041F3319262872540099A87D /* EnumsAndProtocols */,
 				041F32CB262868EC0099A87D /* Extensions */,
-				047AA8562640BE0C00F3950B /* Helpers */,
 				041F32CA262868E40099A87D /* Network */,
 				041F32C7262868CD0099A87D /* Model */,
 				041F32C8262868D40099A87D /* View */,
@@ -271,14 +268,6 @@
 				041F33342628772C0099A87D /* RepoCellViewModel.swift */,
 			);
 			path = Repos;
-			sourceTree = "<group>";
-		};
-		047AA8562640BE0C00F3950B /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				047AA8572640BE3900F3950B /* Observable.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -426,7 +415,6 @@
 				041F3366262885E10099A87D /* Inspectables.swift in Sources */,
 				041F33352628772C0099A87D /* RepoCellViewModel.swift in Sources */,
 				041F334126287B9B0099A87D /* RepoCell.swift in Sources */,
-				047AA8582640BE3900F3950B /* Observable.swift in Sources */,
 				041F3292262868930099A87D /* AppDelegate.swift in Sources */,
 				041F331B2628726A0099A87D /* NetworkRequestMethod.swift in Sources */,
 				041F3294262868930099A87D /* SceneDelegate.swift in Sources */,
