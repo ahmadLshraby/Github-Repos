@@ -15,9 +15,6 @@ class RepoCell: UITableViewCell {
     @IBOutlet weak var repoDateLbl: UILabel!
     @IBOutlet weak var reedMeBtn: UIButton!
     
-    
-    public private (set) var repoUrl: URL?
-    
     var repo: RepoCellViewModel? {
         didSet {
             repoNameLbl.text = repo?.name
@@ -25,9 +22,6 @@ class RepoCell: UITableViewCell {
             repoDateLbl.getRepoDateFrom(repoUrl: repo?.repoDate ?? "")
             if let imgUrl = repo?.imageUrl {
                 repoImageView.downloadFrom(fromLink: imgUrl, contentMode: .scaleAspectFill)
-            }
-            if let url = repo?.repoUrl {
-                repoUrl = url
             }
         }
     }

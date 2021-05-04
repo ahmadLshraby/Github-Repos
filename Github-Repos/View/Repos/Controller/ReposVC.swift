@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import Combine
 
 class ReposVC: UIViewController {
     
@@ -15,8 +16,10 @@ class ReposVC: UIViewController {
     
     var search = UISearchController(searchResultsController: nil)
     let reposViewModel = RepoViewModel()
+    var reposData = [ReposData]()
     var refreshControl = UIRefreshControl()
     var observer: NSKeyValueObservation?
+    var cancellable: [AnyCancellable] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +27,6 @@ class ReposVC: UIViewController {
         addRefreshControllerToTable()
         changeNavigationBarTitleView(KVO: &observer, largeTitle: "GitHub-Repos", smallImageName: "github")
         bindTableViewData()
-        bindNetworkErrorMessage()
         getRepos()
     }
     
@@ -70,23 +72,23 @@ class ReposVC: UIViewController {
 extension ReposVC {
     
     func bindTableViewData() {
-        reposViewModel.repos.bind { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.shouldPresentLoadingView(false)
-                self?.tableView.reloadData()
-            }
-        }
-    }
-    
-    func bindNetworkErrorMessage() {
-        reposViewModel.errorMsg?.bind { [weak self] (msg) in
-            DispatchQueue.main.async {
-                self?.shouldPresentLoadingView(false)
-                if let errorMsg = msg {
-                    self?.shouldPresentAlertView(true, title: "GitHub-Repos", alertText: errorMsg, actionTitle: "Ok", errorView: nil)
+        reposViewModel.passSubject
+            .receive(on: DispatchQueue.main)
+            .sink { (completion) in
+                self.shouldPresentLoadingView(false)
+                self.refreshControl.endRefreshing()
+                switch completion {
+                case .finished:
+                    print("FINISHED")
+                case .failure(let error):
+                    self.shouldPresentAlertView(true, title: "GitHub-Repos", alertText: error.localizedDescription, actionTitle: "Ok", errorView: nil)
                 }
-            }
-        }
+            } receiveValue: { (value) in
+                self.shouldPresentLoadingView(false)
+                self.refreshControl.endRefreshing()
+                self.reposData = value
+                self.tableView.reloadData()
+            }.store(in: &cancellable)
     }
     
     // pull to refresh data
@@ -110,22 +112,21 @@ extension ReposVC {
 // MARK: - TABLEVIEW
 extension ReposVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reposViewModel.repos.value?.count ?? 0
+        return reposData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell",for: indexPath) as? RepoCell {
-            if let repo = reposViewModel.repos.value?[indexPath.row] {
-                cell.repo = RepoCellViewModel(repo: repo)
-                return cell
-            }
+            let repo = reposData[indexPath.row]
+            cell.repo = RepoCellViewModel(repo: repo)
+            return cell
         }
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let repo = reposViewModel.repos.value?[indexPath.row]
-        if let url = URL(string: repo?.htmlURL ?? "") {
+        let repo = reposData[indexPath.row]
+        if let url = URL(string: repo.htmlURL ?? "") {
             let safariVC = SFSafariViewController(url: url)
             self.present(safariVC, animated: true, completion: nil)
         }
