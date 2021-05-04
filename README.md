@@ -33,7 +33,7 @@
 ---
 
 ## Details <a name = "details"></a>
-- MVVM with protocol and delegate
+- MVVM with native Observable Class (Old binding method was by peotocols and delegates)
 - Native URLSession for networking and fetching images
 - Codable for parsing JSON
 
