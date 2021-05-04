@@ -11,4 +11,5 @@ enum NetworkServicesError {
     case serverError(serverError: String)
     case connectionError(connection: String)
     case responseError(response: String)
+    case authenticationError
 }

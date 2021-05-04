@@ -10,8 +10,8 @@ import Foundation
 
 class RepoViewModel {
     
-    public private (set) var reposData: [ReposData]?
-    var delegate: NetworkHandler? // delegate to pass actions
+    var repos: Observable<[ReposData]> = Observable([])
+    var errorMsg: Observable<String>?
     
 }
 
@@ -22,18 +22,17 @@ extension RepoViewModel {
     func getAllRepos() {
         NetworkServices.request(endPoint: Repos_EndPoints.listGithubRepos, responseClass: [ReposData].self) { (reData, error) in
             if let repos = reData {
-                self.reposData = repos
-                self.delegate?.successNetworkRequest()
+                self.repos.value = repos
             }else {
                 switch error {
                 case .connectionError(let msg):
-                    self.delegate?.failedNetworkRequest(withError: msg)
+                    self.errorMsg?.value = msg
                 case .serverError(let msg):
-                    self.delegate?.failedNetworkRequest(withError: msg)
+                    self.errorMsg?.value = msg
                 case .responseError(let msg):
-                    self.delegate?.failedNetworkRequest(withError: msg)
+                    self.errorMsg?.value = msg
                 default:
-                    self.delegate?.failedNetworkRequest(withError: "UNKNOWN")
+                    self.errorMsg?.value = "UNKNOWN"
                 }
             }
         }
@@ -43,18 +42,17 @@ extension RepoViewModel {
     func searchForRepos(query: String) {
         NetworkServices.request(endPoint: Repos_EndPoints.searchGithubRepos(q: query), responseClass: SearchModelData.self) { (reData, error) in
             if let repos = reData {
-                self.reposData = repos.items
-                self.delegate?.successNetworkRequest()
+                self.repos.value = repos.items
             }else {
                 switch error {
                 case .connectionError(let msg):
-                    self.delegate?.failedNetworkRequest(withError: msg)
+                    self.errorMsg?.value = msg
                 case .serverError(let msg):
-                    self.delegate?.failedNetworkRequest(withError: msg)
+                    self.errorMsg?.value = msg
                 case .responseError(let msg):
-                    self.delegate?.failedNetworkRequest(withError: msg)
+                    self.errorMsg?.value = msg
                 default:
-                    self.delegate?.failedNetworkRequest(withError: "UNKNOWN")
+                    self.errorMsg?.value = "UNKNOWN"
                 }
             }
         }
