@@ -23,6 +23,8 @@ class ReposVC: UIViewController {
         setupDelegates()
         addRefreshControllerToTable()
         changeNavigationBarTitleView(KVO: &observer, largeTitle: "GitHub-Repos", smallImageName: "github")
+        bindTableViewData()
+        bindNetworkErrorMessage()
         getRepos()
     }
     
@@ -35,7 +37,6 @@ class ReposVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        reposViewModel.delegate = self
     }
     
     fileprivate func addRefreshControllerToTable() {
@@ -65,22 +66,26 @@ class ReposVC: UIViewController {
 }
 
 
-// MARK: VIEW MODEL DELEGATE & ACTIONS
-extension ReposVC: NetworkHandler {
-    // when success network request and return valid data to reload table
-    func successNetworkRequest() {
-        DispatchQueue.main.async {
-            self.shouldPresentLoadingView(false)
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
+// MARK: VIEW MODEL BINDINGS & ACTIONS
+extension ReposVC {
+    
+    func bindTableViewData() {
+        reposViewModel.repos.bind { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.shouldPresentLoadingView(false)
+                self?.tableView.reloadData()
+            }
         }
     }
     
-    // when failure occures in network request and return error
-    func failedNetworkRequest(withError error: String) {
-        DispatchQueue.main.async {
-            self.shouldPresentLoadingView(false)
-            self.shouldPresentAlertView(true, title: "GitHub-Repos", alertText: error, actionTitle: "Ok", errorView: nil)
+    func bindNetworkErrorMessage() {
+        reposViewModel.errorMsg?.bind { [weak self] (msg) in
+            DispatchQueue.main.async {
+                self?.shouldPresentLoadingView(false)
+                if let errorMsg = msg {
+                    self?.shouldPresentAlertView(true, title: "GitHub-Repos", alertText: errorMsg, actionTitle: "Ok", errorView: nil)
+                }
+            }
         }
     }
     
@@ -105,12 +110,12 @@ extension ReposVC: NetworkHandler {
 // MARK: - TABLEVIEW
 extension ReposVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reposViewModel.reposData?.count ?? 0
+        return reposViewModel.repos.value?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "RepoCell",for: indexPath) as? RepoCell {
-            if let repo = reposViewModel.reposData?[indexPath.row] {
+            if let repo = reposViewModel.repos.value?[indexPath.row] {
                 cell.repo = RepoCellViewModel(repo: repo)
                 return cell
             }
@@ -119,7 +124,7 @@ extension ReposVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let repo = reposViewModel.reposData?[indexPath.row]
+        let repo = reposViewModel.repos.value?[indexPath.row]
         if let url = URL(string: repo?.htmlURL ?? "") {
             let safariVC = SFSafariViewController(url: url)
             self.present(safariVC, animated: true, completion: nil)
