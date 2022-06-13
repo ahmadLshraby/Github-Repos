@@ -1,0 +1,9 @@
+[submodule "flidgeparent_core"]
+	path = flidgeparent_core
+	url = https://AhmadShraby@bitbucket.org/ahmadshraby/flidgeparent_core.git
+[submodule "flidgeparent_application"]
+	path = flidgeparent_application
+	url = https://AhmadShraby@bitbucket.org/ahmadshraby/flidgeparent_application.git
+[submodule "flidgeparent_infrastructure"]
+	path = flidgeparent_infrastructure
+	url = https://AhmadShraby@bitbucket.org/ahmadshraby/flidgeparent_infrastructure.git
